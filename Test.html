@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io /apple-touch-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io /favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io /favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column; /* Располагаем элементы вертикально */
+            min-height: 100vh; /* Минимальная высота страницы — 100% экрана */
+            margin: 0;
+            background-color: #a79abb; 
+            background-size: cover;
+            background-position: center;
+            color: #6e6295;
+        }
+
+        .logo img {
+            width: 220px;
+            height: auto;
+        }
+
+        .header {
+            background-color: white; 
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            border-radius: 0 0 20px 20px;
+            padding: 0 10px;
+            height: 150px;
+        }
+
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #a79abb;
+            margin-right: 40px;
+        }
+
+        .header nav {
+            display: flex;
+            gap: 50px;
+        }
+
+        .header nav a {
+            text-decoration: none;
+            color: #6e6295; 
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .imgTestlogo {
+            display: flex;
+            justify-content: center; /* Центрує зображення */
+            align-items: center;
+            margin: 40px auto; /* Додає відступи зверху і знизу, центрує блок */
+            width:60%;
+        }
+
+        .imgTestlogo img {
+            max-width: 40%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .container {
+            position: relative; /* Забезпечує звичайний потік */
+            margin: 20px auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 600px;
+            background: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        button {
+            background-color: #4a90e2;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #357abd;
+        }
+
+        footer {
+    background-color: #f3f3f3;
+    color: #6e6295;
+    text-align: center;
+    border-radius: 8px;
+    padding: 20px 0;
+    margin-top: auto; /* Прижимает футер к низу */
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.footer-content nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+}
+
+.footer-content nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+.footer-content nav ul li a {
+    color: #6e6295;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-content nav ul li a:hover {
+    text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <a href="HomePage.html">
+                <img src="Image/Logo.png" alt="Learn HTML Logo">
+            </a>
+        </div>
+        <nav>
+            <a href="HTML.html" target="_blank">Елементи HTML</a>
+            <a href="CSS.html" target="_blank">Елементи CSS</a>
+            <a href="JS.html" target="_blank">Елементи JS</a>
+            <a href="Search.html" target="_blank">Довідник</a>
+            <a href="Theory.html" target="_blank">Теорія</a>
+            <a href="Video.html" target="_blank">Відеоуроки</a>
+            <a href="https://jsfiddle.net/" target="_blank">JSFiddle</a>
+        </nav>
+    </div>
+
+    <div class="imgTestlogo">
+        <img src="Image/TestLogo.png" alt="Test Logo">
+    </div>
+
+    <div class="container">
+
+        <div id="quiz">
+            <p id="question" class="question"><strong>Запитання буде тут</strong></p>
+            <form id="answers">
+                <!-- Варіанти відповідей додаються динамічно -->
+            </form>
+            <button id="next" type="button" onclick="nextQuestion()">Далі</button>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Що таке HTML?",
+                options: ["Мова програмування", "Мова розмітки", "Графічний редактор", "Система управління базами даних"],
+                correct: "Мова розмітки"
+            },
+            {
+                question: "Який елемент HTML використовується для створення заголовка першого рівня?",
+                options: ["head", "h1", "title", "header"],
+                correct: "h1"
+            },
+            {
+                question: "Що таке атрибут у HTML?",
+                options: ["Елемент списку", "Стилізація елементу", "Додаткова інформація про елемент", "Секція документа"],
+                correct: "Додаткова інформація про елемент"
+            },
+            {
+                question: "Як створити гіперпосилання в HTML?",
+                options: ["link", "a", "href", "url"],
+                correct: "a"
+            },
+            {
+                question: "Який тег використовується для відображення зображення?",
+                options: ["pic", "src", "img", "figure"],
+                correct: "img"
+            },
+            {
+                question: "Як додати коментар у HTML?",
+                options: ["//коментар", "/*коментар*/", "!--коментар--", "#коментар"],
+                correct: "!--коментар--"
+            },
+            {
+                question: "Що таке DOCTYPE і навіщо він потрібен у HTML?",
+                options: ["Визначає тип документа", "Додає стиль до документа", "Вказує на сервір", "Створює нову сторінку"],
+                correct: "Визначає тип документа"
+            },
+            {
+                question: "Чи є HTML чутливим до регістру?",
+                options: ["Так", "Ні", "Інколи", "В залежності від команди"],
+                correct: "Ні"
+            },
+            {
+                question: "Що робить тег title?",
+                options: ["Відображає назву сторінки у браузері", "Змінює загаловок документа", "Додає підзаголовок", "Додає стилі до сторінки"],
+                correct: "Відображає назву сторінки у браузері"
+            },
+            {
+                question: "Як створити ненумерований список у HTML?",
+                options: ["ol", "ul", "li", "list"],
+                correct: "ul"
+            },
+            {
+                question: "Що таке семантичні елементи в HTML?",
+                options: ["Елементи з визначеним значенням", "Елементи для стилів", "Елементи JavaScript", "Елементи для роботи з базами даних"],
+                correct: "Елементи з визначеним значенням"
+            },
+            {
+                question: "Який елемент застосовується для додавання відео на веб-сторінку?",
+                options: ["video", "media", "iframe", "embed"],
+                correct: "video"
+            },
+            {
+                question: "Як правильно додати зовнішній CSS-файл до HTML-документа?",
+                options: ["link", "style", "css", "script"],
+                correct: "link"
+            }, 
+            {
+                question: "Що таке мета-дані в HTML і як їх додати?",
+                options: ["Інформація про сторінку; за допомогою meta", "CSS-стиль; за допомогою style", "Відео-контент; за допомогою video", "Список посилань; за допомогою ul"],
+                correct: "Інформація про сторінку; за допомогою meta"
+            },
+            {
+                question: "Який тег використовується для визначення таблиці?",
+                options: ["tab", "table", "td", "th"],
+                correct: "table"
+            },
+            {
+                question: "Як створити текстовий ввід у HTML-формі?",
+                options: ["input type='text'", "textarea", "text", "form"],
+                correct: "input type='text'"
+            },
+            {
+                question: "Що робить атрибут alt у тегу 'img'?",
+                options: ["Відображає назву сторінки", "Змінює розмір зображення", "Додає альтернативний текст", "Підключає стилі до зображення"],
+                correct: "Додає альтернативний текст"
+            },
+            {
+            question: "Як створити кнопку в HTML?",
+                options: ["btn", "button", "input type='button'", "click"],
+                correct: "button"
+            },
+            {
+            question: "Який тег використовується для створення посилання на email",
+                options: ["email", "a href='mailto:'", "link", "contact"],
+                correct: "a href='mailto:'"
+            },
+            {
+            question: "Як у HTML зробити текст виділеним жирним шрифтом?",
+                options: ["bold", "b", "i", "em"],
+                correct: "b"
+            },
+            {
+            question: "Як у HTML зробити текст курсивним?",
+                options: ["italic", "i", "emphasize", "strong"],
+                correct: "i"
+            },
+            {
+            question: "Що робить тег 'br'?",
+                options: ["Додає перенос рядка", "Змінює колір тексту", "Додає заголовок", "Додає відступ"],
+                correct: "Додає перенос рядка"
+            },
+            {
+            question: "Як створити нумерований список?",
+                options: ["ol", "ul", "li", "list"],
+                correct: "ol"
+            },
+            {
+            question: "Який тег використовується для підкреслення тексту?",
+                options: ["underline", "u", "em", "bold"],
+                correct: "u"
+            },
+            {
+            question: "Що робить атрибут href у тегу 'a'",
+                options: ["Вказує URL для переходу", "Додає текст до посилання", "Змінює колір посилання", "Налаштовує анімацію"],
+                correct: "Вказує URL для переходу"
+            },
+            {
+            question: "Як створити список визначень?",
+                options: ["dl", "ul", "list", "table"],
+                correct: "dl"
+            },
+            {
+            question: "Як встановити фон для веб-сторінки?",
+                options: ["За допомогою атрибуту style у тегу 'body'", "За допомогою 'background'", "За допомогою 'color'", "Це неможливо в HTML"],
+                correct: "За допомогою атрибуту style у тегу 'body'"
+            },
+            {
+            question: "Що таке iframe?",
+                options: ["Елемент для вбудування іншого HTML-документа", "Елемент для таблиці", "Елемент для встановлення зображення", "Елемент для стилів"],
+                correct: "Елемент для вбудування іншого HTML-документа"
+            },
+            {
+            question: "Як створити випадаючий список?",
+                options: ["select", "dropdown", "list", "options"],
+                correct: "select"
+            },
+            {
+            question: "Який атрибут використовується для встановлення унікального ідентифікатора елементу?",
+                options: ["id", "class", "name", "indentifier"],
+                correct: "id"
+            },
+            {
+            question: "Як встановити горизонтальну лінію?",
+                options: ["hr", "line", "border", "divider"],
+                correct: "hr"
+            },
+            {
+            question: "Як створити поле для введення пароля у формі?",
+                options: ["input type='password'", "password", "input type='text'", "secure"],
+                correct: "input type='password'"
+            },
+            {
+            question: "Що таке тег 'hear'?",
+                options: ["Створює заголовок документа", "Відображає текст сторінки", "Містить мета-дані сторінки", "Створює нижній колонтитул"],
+                correct: "Містить мета-дані сторінки"
+            },
+            {
+            question: "Як створити багаторядкове текстове поле?",
+                options: ["input type='textarea'", "textarea", "input='text'", "text"],
+                correct: "textarea"
+            },
+            {
+            question: "Як створити таблицю у HTML?",
+                options: ["table", "grid", "tab", "layout"],
+                correct: "table"
+            },
+            {
+            question: "Як у HTML створити список із маркерами?",
+                options: ["ul", "ol", "list", "item"],
+                correct: "ul"
+            },
+            { 
+            question: "Як додати зображення на сторінку?",
+                options: ["image src='url'", "img src='url'/", "picture", "src"],
+                correct: "img src='url'/"
+            },
+            {
+            question: "Як створити посилання, яке відкриється вновій вкладці?",
+                options: ["Додати атрибут target='_blank'", "Додати атрибут href='_blank'", "Додати атрибут link='_new'", "Це неможливо"],
+                correct: "Додати атрибут target='_blank'"
+            },
+            {
+            question: "Що робить тег 'noscript'?",
+                options: ["Відображає контент для браузера без підтримки JavaScript", "Додає стилі до сторінки", "Вставляє текст", "Виконує JavaScript"],
+                correct: "Відображає контент для браузера без підтримки JavaScript"
+            },
+            {
+            question: "Як створити зображення круглим у HTML?",
+                options: ["Використати атрибут circle='true' у тегу img", "Застосувати CSS-правило border-radius: 50%; до зображення", "Використати тег circle для зображення", "Додати атрибут shape='round' у тегу img"],
+                correct: "Застосувати CSS-правило border-radius: 50%; до зображення"
+            },
+            {
+            question: "Що робить атрибут lang y HTML?",
+                options: ["Вказує мову документа", "Змінює стиль тексту", "Підключає JavaScript", "Змінює тип документа"],
+                correct: "Вказує мову документа"
+            },
+            {
+            question: "Як задати дефолтне значення для елемента форми?",
+                options: ["Використовуючи атрибути default", "Використовуючи атрибут start", "Використовуючи атрибут value", "Це неможливо зробити"],
+                correct: "Використовуючи атрибут value"
+            },
+            {
+            question: "Що робить атрибут maxlength?",
+                options: ["Обмежує кількість символів для вводу", "Обмежує кількість слів", "Змінює ширину текстового поля", "Додає стилі"],
+                correct: "Обмежує кількість символів для вводу"
+            },
+            {
+            question: "Як створити контейнер для JavaScript?",
+                options: ["script", "js", "code", "program"],
+                correct: "script"
+            },
+            {
+            question: "Який атрибут додає зображенню висоти?",
+                options: ["height", "size", "scale", "alt"],
+                correct: "height"
+            },
+            {
+            question: "Як визначити нижній колонтитул сторінки?",
+                options: ["footer", "botton", "end", "colophon"],
+                correct: "footer"
+            },
+            {
+            question: "Як вставити текст із фіксованою шириною шрифту?",
+                options: ["pre", "code", "fixed", "type"],
+                correct: "pre"
+            },
+            {
+            question: "Як створити поле вибору checkbox?",
+                options: ["checkbox", "input type='checkbox'", "select", "check"],
+                correct: "input type='checkbox'"
+            },
+            {
+            question: "Як у HTML створити задній фон для сторінки чи елемента?",
+                options: ["Використати атрибут background у тегу 'body'", "Застосувати CSS-правило background-color або background-image", "Використати тег 'background'", "Додати атрибут bg у будь-який тег"],
+                correct: "Застосувати CSS-правило background-color або background-image"
+            },
+            {
+            question: "Як визначити заголовок другого рівня?",
+                options: ["h1", "h2", "title", "header"],
+                correct: "h2"
+            },
+          
+        ]; 
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function showQuestion() {
+            const questionElem = document.getElementById("question");
+            const answersElem = document.getElementById("answers");
+
+            const currentQuestion = questions[currentQuestionIndex];
+
+            // Оновлення тексту питання
+            questionElem.innerHTML = `<strong>${currentQuestionIndex + 1}. ${currentQuestion.question}</strong>`;
+
+            // Оновлення варіантів відповідей
+            answersElem.innerHTML = currentQuestion.options.map((option, index) => `
+                <label>
+                    <input type="radio" name="answer" value="${option}"> ${option}
+                </label>
+            `).join('');
+        }
+
+       function nextQuestion() {
+    const selectedOption = document.querySelector('input[name="answer"]:checked');
+
+    // Перевірка, чи вибрана відповідь
+    if (!selectedOption) {
+        alert("Виберіть відповідь перед тим, як продовжити.");
+        return;
+    }
+
+    // Обрізання зайвих пробілів перед порівнянням
+    const selectedValue = selectedOption.value.trim();
+    const correctAnswer = questions[currentQuestionIndex].correct.trim();
+
+    // Перевірка правильності відповіді
+    if (selectedValue === correctAnswer) {
+        score++;
+    }
+
+    // Перехід до наступного питання або завершення тесту
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        showQuestion();
+    } else {
+        showResults();
+    }
+}
+
+        function showResults() {
+            const quizElem = document.getElementById("quiz");
+            quizElem.innerHTML = `
+                <h2>Тест завершено!</h2>
+                <p>Ви відповіли правильно на ${score} з ${questions.length} питань.</p>
+            `;
+        }
+
+        showQuestion();
+    </script>
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 LEARN HTML. Усі права захищені.</p>
+            <nav>
+                <ul>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="contact.html"  target="_blank">Написати нам</a></li>
+                    <li><a href="#">Політика конфіденційності</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </footer>
+</body>
+</html>
